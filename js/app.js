@@ -23,6 +23,8 @@
 
 //Enemy in ES6 code
 
+let allEnemies=[];
+
 class Enemy {
   constructor(){
     this.sprite = 'images/enemy-bug.png';
@@ -43,6 +45,23 @@ class Enemy {
 // This class requires an update(), render() and
 // a handleInput() method.
 
+class Player {
+  constructor() {
+    this.sprite = 'images/char-boy.png';
+  }
+
+  update(dt) {
+
+  }
+
+  render() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  }
+
+  handleInput() {
+
+  }
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -62,3 +81,5 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+let player = new Player();
