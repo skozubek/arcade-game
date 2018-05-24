@@ -78,12 +78,11 @@ class Player {
 
   //Check if player successfuly crossed the board
   checkWin() {
-    console.log(player.x+' '+player.y)
     if(this.y < 0){
     score += 10;
     this.startOver();
     }
-    if (score === 20) {
+    if (score === winningScore) {
       modalText.innerText = 'You won!';
       modal.classList.toggle("opened");
       resetGame();
@@ -132,10 +131,14 @@ function resetGame(){
    score = 0;
    player.startOver();
  }
+
 //Game level - enemies speed factor
-let gameLevel = 5;
+const gameLevel = 5;
+//Points to win - number of points to win the game
+const winningScore = 100;
 //Game score
 let score = 0;
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -178,7 +181,6 @@ close.addEventListener("click", function() {
 
 play.addEventListener("click", function() {
   modal.classList.toggle("opened");
-  resetGame();
 });
 
 // When the user clicks anywhere outside of the modal, close it
