@@ -84,13 +84,16 @@ var Engine = (function(global) {
     }
 
     function checkCollisions(){
-      if(player.x+35>=enemy1.x-35 && player.x-35<=enemy1.x+35 && player.y+10>=enemy1.y-10 && player.y-10<=enemy1.y+10) {
+      if(player.x+35>=enemy1.x-35 && player.x-35<=enemy1.x+35 &&
+        player.y+10>=enemy1.y-10 && player.y-10<=enemy1.y+10) {
         player.startOver();
       }
-      if(player.x+35>=enemy2.x-35 && player.x-35<=enemy2.x+35 && player.y+10>=enemy2.y-10 && player.y-10<=enemy2.y+10) {
+      if(player.x+35>=enemy2.x-35 && player.x-35<=enemy2.x+35 &&
+        player.y+10>=enemy2.y-10 && player.y-10<=enemy2.y+10) {
         player.startOver();
       }
-      if(player.x+35>=enemy3.x-35 && player.x-35<=enemy3.x+35 && player.y+10>=enemy3.y-10 && player.y-10<=enemy3.y+10) {
+      if(player.x+35>=enemy3.x-35 && player.x-35<=enemy3.x+35 &&
+        player.y+10>=enemy3.y-10 && player.y-10<=enemy3.y+10) {
         player.startOver();
       }
     }
@@ -175,8 +178,6 @@ var Engine = (function(global) {
      */
     function reset() {
         // noop
-        console.log("reset :), score: " + score);
-
     }
 
 
