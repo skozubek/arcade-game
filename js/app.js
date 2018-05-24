@@ -40,14 +40,18 @@ class Enemy {
     }
   }
 
+  //randomize the step size of the enemy per frame
+  //speed up all the enemies by increasing gameLevel
   setRandomStep() {
     this.step = Math.random() * gameLevel + 1;
   }
 
+  //randomize the point enemy will start movin
   setRandomOffsetX() {
     this.x = Math.random() * -500;
   }
 
+  //randomize the row on which the enemy will be moving
   setRandomRow() {
     this.y = 60 + 85 * Math.floor(Math.random() * 3);
     console.log(this.y);
@@ -70,7 +74,15 @@ class Player {
   }
 
   update(dt) {
+    this.startOver();
+  }
 
+  //Put player at the starting position
+  startOver() {
+    if(this.y === -20){
+        this.x = 200;
+        this.y = 405;
+    }
   }
 
   render() {
@@ -105,7 +117,7 @@ class Player {
   }
 }
 //Game level - enemies speed factor
-let gameLevel = 4;
+let gameLevel = 7;
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
