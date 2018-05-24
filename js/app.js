@@ -22,16 +22,35 @@
 //};
 
 //Enemy in ES6 code
-
 class Enemy {
-  constructor(x = 100, y = 100){
+  constructor(x = 100, y = 100, step = 1){
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
+    this.setRandomStep();
+  }
+  update(dt){
+    this.x = this.x + this.step;
+    //once enemy leaves canvas set new random step and position
+    if (this.x > 450){
+    //set random step
+    this.setRandomStep();
+    this.setRandomOffsetX();
+    this.setRandomRow()
+    }
   }
 
-  update(dt){
+  setRandomStep() {
+    this.step = Math.random() * gameLevel + 1;
+  }
 
+  setRandomOffsetX() {
+    this.x = Math.random() * -500;
+  }
+
+  setRandomRow() {
+    this.y = 60 + 85 * Math.floor(Math.random() * 3);
+    console.log(this.y);
   }
 
   render(){
@@ -80,17 +99,20 @@ class Player {
     }
     //handle move right (check right canvas border reached)
     if (key == 'right' && this.x <= borderRight) {
-      console.log(this.x)
       this.x += horizontalMove;
     }
+    console.log(this.x+","+this.y)
   }
 }
+//Game level - enemies speed factor
+let gameLevel = 4;
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-let enemy1 = new Enemy(100, 60);
-let enemy2 = new Enemy(100, 145);
-let enemy3 = new Enemy(100, 230);
+
+let enemy1 = new Enemy(-100, 60, 2);
+let enemy2 = new Enemy(-500, 145, 3);
+let enemy3 = new Enemy(-200, 230, 4);
 
 let allEnemies=[enemy1, enemy2, enemy3];
 
