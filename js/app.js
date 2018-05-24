@@ -70,6 +70,9 @@ class Player {
     this.sprite = 'images/char-boy.png';
     this.x = x;
     this.y = y;
+    //move up and down step sizes
+    this.horizontalMove = 100;
+    this.verticalMove = 85;
   }
 
   update(dt) {
@@ -82,6 +85,7 @@ class Player {
     score += 10;
     this.startOver();
     }
+    //Check if it is GameOver
     if (score === winningScore) {
       modalText.innerText = 'You won!';
       modal.classList.toggle("opened");
@@ -99,29 +103,49 @@ class Player {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 
+ //Functions moving player up, down, right and left
+  moveUp(){
+    if (this.y >= 0) {
+      this.y -= this.verticalMove;
+    }
+  }
+
+  moveDown(){
+    if (this.y <= 320) {
+      this.y += this.verticalMove;
+    }
+  }
+
+  moveRight(){
+    if (this.x <= 300) {
+      this.x += this.horizontalMove;
+    }
+  }
+
+  moveLeft(){
+    if (this.x >= 0) {
+      this.x -= this.horizontalMove;
+    }
+  }
+
   handleInput(key) {
-    const horizontalMove = 100;
-    const verticalMove = 85;
-    const borderLeft = 100;
-    const borderRight = 300;
-    const borderDown = 320;
-    const borderUp = 0;
 
     //handle move up (check if up canvas border reached)
-    if (key == 'up' && this.y >= borderUp) {
-      this.y -= verticalMove;
+    if (key == 'up'){
+      this.moveUp();
     }
     //handle move down (check if down canvas border reached)
-    if (key == 'down' && this.y <= borderDown) {
-      this.y += verticalMove;
+    if (key == 'down'){
+      this.moveDown();
     }
+
     //handle move left (check left canvas border reached)
-    if (key == 'left' && this.x >= borderLeft) {
-      this.x -= horizontalMove;
+    if (key == 'left') {
+      this.moveLeft();
     }
     //handle move right (check right canvas border reached)
-    if (key == 'right' && this.x <= borderRight) {
-      this.x += horizontalMove;
+    if (key == 'right') {
+      this.moveRight();
     }
   }
 }
