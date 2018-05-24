@@ -56,6 +56,7 @@ var Engine = (function(global) {
          * function again as soon as the browser is able to draw another frame.
          */
         win.requestAnimationFrame(main);
+        //reset();
     }
 
     /* This function does some initial setup that should only occur once,
@@ -79,7 +80,19 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
+    }
+
+    function checkCollisions(){
+      if(player.x+38>=enemy1.x-38 && player.x-38<=enemy1.x+38 && player.y+10>=enemy1.y-10 && player.y-10<=enemy1.y+10) {
+        console.log('bang!');
+      }
+      if(player.x+38>=enemy2.x-38 && player.x-38<=enemy2.x+38 && player.y+10>=enemy2.y-10 && player.y-10<=enemy2.y+10) {
+        console.log('bang!');
+      }
+      if(player.x+38>=enemy3.x-38 && player.x-38<=enemy3.x+38 && player.y+10>=enemy3.y-10 && player.y-10<=enemy3.y+10) {
+        console.log('bang!');
+      }
     }
 
     /* This is called by the update function and loops through all of the
@@ -162,7 +175,10 @@ var Engine = (function(global) {
      */
     function reset() {
         // noop
+        console.log("reset :), score: " + score);
+
     }
+
 
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when

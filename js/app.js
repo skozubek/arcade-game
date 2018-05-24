@@ -54,7 +54,6 @@ class Enemy {
   //randomize the row on which the enemy will be moving
   setRandomRow() {
     this.y = 60 + 85 * Math.floor(Math.random() * 3);
-    console.log(this.y);
   }
 
   render(){
@@ -74,15 +73,27 @@ class Player {
   }
 
   update(dt) {
+    this.checkWin();
+  }
+
+  //Check if player successfuly crossed the board
+  checkWin() {
+    console.log(player.x+' '+player.y)
+    if(this.y < 0){
+    score += 10;
     this.startOver();
+    }
+    if (score === 20) {
+      modalText.innerText = 'You won!';
+      modal.classList.toggle("opened");
+      resetGame();
+    }
   }
 
   //Put player at the starting position
   startOver() {
-    if(this.y === -20){
-        this.x = 200;
-        this.y = 405;
-    }
+    this.x = 200;
+    this.y = 405;
   }
 
   render() {
@@ -113,11 +124,18 @@ class Player {
     if (key == 'right' && this.x <= borderRight) {
       this.x += horizontalMove;
     }
-    console.log(this.x+","+this.y)
   }
 }
+
+//Reset Game
+function resetGame(){
+   score = 0;
+   player.startOver();
+ }
 //Game level - enemies speed factor
-let gameLevel = 7;
+let gameLevel = 5;
+//Game score
+let score = 0;
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -141,4 +159,31 @@ document.addEventListener('keyup', function(e) {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
+});
+
+
+// Get the modal
+const modal = document.getElementById('myModal');
+// Get the modal text
+const modalText = document.getElementById('modal-text');
+// Get the <span> element that closes the modal
+const close = document.getElementsByClassName("close")[0];
+// Get the play again button element
+const play = document.querySelector('.button');
+
+// When the user clicks on <close> (x), close the modal
+close.addEventListener("click", function() {
+  modal.classList.toggle("opened");
+});
+
+play.addEventListener("click", function() {
+  modal.classList.toggle("opened");
+  resetGame();
+});
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener("click", function(event) {
+  if (event.target === modal) {
+    modal.classList.toggle("opened");
+  }
 });
