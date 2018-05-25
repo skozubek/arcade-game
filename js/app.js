@@ -1,19 +1,19 @@
 // Enemies our player must avoid
 class Enemy {
-  constructor(x = 100, y = 100, step = 1){
+  constructor(x = 100, y = 100, step = 1) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
     this.setRandomStep();
   }
-  update(dt){
+  update(dt) {
     this.x = this.x + this.step;
     //once enemy leaves canvas set new random step and position
-    if (this.x > 450){
-    //set random step
-    this.setRandomStep();
-    this.setRandomOffsetX();
-    this.setRandomRow()
+    if (this.x > 450) {
+      //set random step
+      this.setRandomStep();
+      this.setRandomOffsetX();
+      this.setRandomRow()
     }
   }
 
@@ -33,7 +33,7 @@ class Enemy {
     this.y = 60 + 85 * Math.floor(Math.random() * 3);
   }
 
-  render(){
+  render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 }
@@ -55,16 +55,20 @@ class Player {
   }
 
   update(dt) {
+    //check if player won the game
     this.checkWin();
+    //check if player lost
     this.checkGameOver();
   }
 
   //Check if player successfuly crossed the board
   checkWin() {
-    if(this.y < 0){
-    this.score += 10;
-    playerScore.innerText = ' ' + this.score + ' / 100';
-    this.startOver();
+    //check if player corossed the board
+    if (this.y < 0) {
+      //add ten points
+      this.score += 10;
+      playerScore.innerText = ' ' + this.score + ' / 100';
+      this.startOver();
     }
     //Check if it is a won game
     if (this.score === winningScore) {
@@ -75,15 +79,15 @@ class Player {
       resetGame();
     }
   }
-
+  //check if player lost all the lifes
   checkGameOver() {
-    if(this.lifes === 0){
-    this.startOver();
-    modalText.innerText = 'You lost! Your score is: ' + this.score + ' / 100.';
-    modal.classList.toggle("opened");
-    modalImg.src = 'images/sad.png';
-    modalImg.alt = 'Sad face for the looser';
-    resetGame();
+    if (this.lifes === 0) {
+      this.startOver();
+      modalText.innerText = 'You lost! Your score is: ' + this.score + ' / 100.';
+      modal.classList.toggle("opened");
+      modalImg.src = 'images/sad.png';
+      modalImg.alt = 'Sad face for the looser';
+      resetGame();
     }
   }
 
@@ -94,7 +98,7 @@ class Player {
   }
 
   //Display number of hearts in the score panel to reflect player's lifes number
-  handleLifes(){
+  handleLifes() {
     playerLifes[player.lifes].firstChild.classList.remove('alive');
     playerLifes[player.lifes].firstChild.classList.add('greyedout');
     player.lifes--;
@@ -104,26 +108,26 @@ class Player {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 
- //Functions moving player up, down, right and left
-  moveUp(){
+  //Functions moving player up, down, right and left
+  moveUp() {
     if (this.y >= 0) {
       this.y -= this.verticalMove;
     }
   }
 
-  moveDown(){
+  moveDown() {
     if (this.y <= 320) {
       this.y += this.verticalMove;
     }
   }
 
-  moveRight(){
+  moveRight() {
     if (this.x <= 300) {
       this.x += this.horizontalMove;
     }
   }
 
-  moveLeft(){
+  moveLeft() {
     if (this.x >= 0) {
       this.x -= this.horizontalMove;
     }
@@ -132,11 +136,11 @@ class Player {
   handleInput(key) {
 
     //handle move up (check if up canvas border reached)
-    if (key == 'up'){
+    if (key == 'up') {
       this.moveUp();
     }
     //handle move down (check if down canvas border reached)
-    if (key == 'down'){
+    if (key == 'down') {
       this.moveDown();
     }
 
@@ -152,15 +156,15 @@ class Player {
 }
 
 //Reset Game
-function resetGame(){
-   player.score = 0;
-   player.lifes = 3;
-   player.startOver();
-   playerLifes[1].firstChild.classList.add('alive');
-   playerLifes[2].firstChild.classList.add('alive');
-   playerLifes[3].firstChild.classList.add('alive');
-   playerScore.innerText = '0 / 100';
- }
+function resetGame() {
+  player.score = 0;
+  player.lifes = 3;
+  player.startOver();
+  playerLifes[1].firstChild.classList.add('alive');
+  playerLifes[2].firstChild.classList.add('alive');
+  playerLifes[3].firstChild.classList.add('alive');
+  playerScore.innerText = '0 / 100';
+}
 
 //Game level - enemies speed factor
 const gameLevel = 5;
@@ -176,24 +180,24 @@ let enemy1 = new Enemy(-100, 60, 2);
 let enemy2 = new Enemy(-500, 145, 3);
 let enemy3 = new Enemy(-200, 230, 4);
 
-let allEnemies=[enemy1, enemy2, enemy3];
+let allEnemies = [enemy1, enemy2, enemy3];
 
 let player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down'
-    };
+  var allowedKeys = {
+    37: 'left',
+    38: 'up',
+    39: 'right',
+    40: 'down'
+  };
 
-    player.handleInput(allowedKeys[e.keyCode]);
+  player.handleInput(allowedKeys[e.keyCode]);
 });
 
-
+// * DOM Elements*
 // Get the modal
 const modal = document.getElementById('myModal');
 // Get the modal text
