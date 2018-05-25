@@ -1,3 +1,4 @@
+'use strict';
 // Enemies our player must avoid
 class Enemy {
   constructor(x = 100, y = 100, step = 1) {
@@ -63,7 +64,7 @@ class Player {
 
   //Check if player successfuly crossed the board
   checkWin() {
-    //check if player corossed the board
+    //check if player crossed the board
     if (this.y < 0) {
       //add ten points
       this.score += 10;
@@ -73,7 +74,7 @@ class Player {
     //Check if it is a won game
     if (this.score === winningScore) {
       modalText.innerText = 'You won!';
-      modal.classList.toggle("opened");
+      modal.classList.toggle('opened');
       modalImg.src = 'images/fireworks.png';
       modalImg.alt = 'Fireworks for the winner';
       resetGame();
@@ -84,7 +85,7 @@ class Player {
     if (this.lifes === 0) {
       this.startOver();
       modalText.innerText = 'You lost! Your score is: ' + this.score + ' / 100.';
-      modal.classList.toggle("opened");
+      modal.classList.toggle('opened');
       modalImg.src = 'images/sad.png';
       modalImg.alt = 'Sad face for the looser';
       resetGame();
@@ -99,9 +100,9 @@ class Player {
 
   //Display number of hearts in the score panel to reflect player's lifes number
   handleLifes() {
-    playerLifes[player.lifes].firstChild.classList.remove('alive');
-    playerLifes[player.lifes].firstChild.classList.add('greyedout');
-    player.lifes--;
+    playerLifes[this.lifes].firstChild.classList.remove('alive');
+    playerLifes[this.lifes].firstChild.classList.add('greyedout');
+    this.lifes--;
   }
 
   render() {
@@ -152,8 +153,7 @@ class Player {
     if (key == 'right') {
       this.moveRight();
     }
-    console.log(this.x+' '+this.y);
-  }  
+  }
 }
 
 //Reset Game
@@ -204,7 +204,7 @@ const modal = document.getElementById('myModal');
 // Get the modal text
 const modalText = document.getElementById('modal-text');
 // Get the <span> element that closes the modal
-const close = document.getElementsByClassName("close")[0];
+const close = document.getElementsByClassName('close')[0];
 // Get the play again button element
 const play = document.querySelector('.button');
 // Get the reset button element
@@ -214,24 +214,24 @@ const playerLifes = document.querySelector('.hearts').children;
 // Get score element
 const playerScore = document.getElementById('score');
 // Get score element
-const modalImg = document.getElementById("modalImg")
+const modalImg = document.getElementById('modalImg')
 
 // When the user clicks on <close> (x), close the modal
-close.addEventListener("click", function() {
-  modal.classList.toggle("opened");
+close.addEventListener('click', function() {
+  modal.classList.toggle('opened');
   resetGame();
 });
 
 //play again button
-play.addEventListener("click", function() {
-  modal.classList.toggle("opened");
+play.addEventListener('click', function() {
+  modal.classList.toggle('opened');
   resetGame();
 });
 
 // When the user clicks anywhere outside of the modal, close it
-window.addEventListener("click", function(event) {
+window.addEventListener('click', function(event) {
   if (event.target === modal) {
-    modal.classList.toggle("opened");
+    modal.classList.toggle('opened');
     resetGame();
   }
 });
