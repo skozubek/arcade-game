@@ -128,7 +128,7 @@ class Player {
   }
 
   moveLeft() {
-    if (this.x >= 0) {
+    if (this.x >= 10) {
       this.x -= this.horizontalMove;
     }
   }
