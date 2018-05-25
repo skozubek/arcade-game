@@ -152,7 +152,8 @@ class Player {
     if (key == 'right') {
       this.moveRight();
     }
-  }
+    console.log(this.x+' '+this.y);
+  }  
 }
 
 //Reset Game
