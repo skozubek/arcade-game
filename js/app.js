@@ -70,6 +70,8 @@ class Player {
     if (this.score === winningScore) {
       modalText.innerText = 'You won!';
       modal.classList.toggle("opened");
+      modalImg.src = 'images/fireworks.png';
+      modalImg.alt = 'Fireworks for the winner';
       resetGame();
     }
   }
@@ -79,6 +81,8 @@ class Player {
     this.startOver();
     modalText.innerText = 'You lost! Your score is: ' + this.score + ' / 100.';
     modal.classList.toggle("opened");
+    modalImg.src = 'images/sad.png';
+    modalImg.alt = 'Sad face for the looser';
     resetGame();
     }
   }
@@ -204,6 +208,8 @@ const reset = document.querySelector('.restart');
 const playerLifes = document.querySelector('.hearts').children;
 // Get score element
 const playerScore = document.getElementById('score');
+// Get score element
+const modalImg = document.getElementById("modalImg")
 
 // When the user clicks on <close> (x), close the modal
 close.addEventListener("click", function() {
