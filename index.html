@@ -2,17 +2,37 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Effective JavaScript: Frogger</title>
+    <title>Arcade Game - The Frogger</title>
     <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="The Frogger - classic arcade game clone">
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 </head>
 <body>
+  <header>
+    <h1>Arcade Game</h1>
+  </header>
+  <div class="container">
+    <div class="score-panel">
+      <ul class="hearts">
+        <li>Lifes: </li>
+        <li><i class="fa fa-heart alive"></i></li>
+        <li><i class="fa fa-heart alive"></i></li>
+        <li><i class="fa fa-heart alive"></i></li>
+      </ul>
+
+      <span>Score: <span id="score">0 / 100</span></span>
+
+
+
+    </div>
+  </div>
     <!-- The Modal -->
     <div id="myModal" class="modal">
 
       <!-- Modal content -->
       <div class="modal-content">
         <span class="close">&times;</span>
-        <h1>You Won!</h1>
+        <h1 id="modal-title">Game Over!</h1>
         <!-- fireworks img from https://pngtree.com -->
         <img id="fireworks" src="images/fireworks.png" alt="fireworsk for the winner">
         <p id="modal-text">Some text in the Modal..</p>

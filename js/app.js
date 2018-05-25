@@ -1,27 +1,4 @@
 // Enemies our player must avoid
-//var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    //this.sprite = 'images/enemy-bug.png';
-//};
-
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-//Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-//};
-
-// Draw the enemy on the screen, required method for game
-//Enemy.prototype.render = function() {
-//    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-//};
-
-//Enemy in ES6 code
 class Enemy {
   constructor(x = 100, y = 100, step = 1){
     this.sprite = 'images/enemy-bug.png';
@@ -70,26 +47,39 @@ class Player {
     this.sprite = 'images/char-boy.png';
     this.x = x;
     this.y = y;
+    this.lifes = 3;
     //move up and down step sizes
     this.horizontalMove = 100;
     this.verticalMove = 85;
+    this.score = 0;
   }
 
   update(dt) {
     this.checkWin();
+    this.checkGameOver();
   }
 
   //Check if player successfuly crossed the board
   checkWin() {
     if(this.y < 0){
-    score += 10;
+    this.score += 10;
+    playerScore.innerText = ' ' + this.score + ' / 100';
     this.startOver();
     }
-    //Check if it is GameOver
-    if (score === winningScore) {
+    //Check if it is a won game
+    if (this.score === winningScore) {
       modalText.innerText = 'You won!';
       modal.classList.toggle("opened");
       resetGame();
+    }
+  }
+
+  checkGameOver() {
+    if(this.lifes === 0){
+    this.startOver();
+    modalText.innerText = 'You lost! Your score is: ' + this.score + ' / 100.';
+    modal.classList.toggle("opened");
+    resetGame();
     }
   }
 
@@ -97,6 +87,13 @@ class Player {
   startOver() {
     this.x = 200;
     this.y = 405;
+  }
+
+  //Display number of hearts in the score panel to reflect player's lifes number
+  handleLifes(){
+    playerLifes[player.lifes].firstChild.classList.remove('alive');
+    playerLifes[player.lifes].firstChild.classList.add('greyedout');
+    player.lifes--;
   }
 
   render() {
@@ -152,16 +149,20 @@ class Player {
 
 //Reset Game
 function resetGame(){
-   score = 0;
+   player.score = 0;
+   player.lifes = 3;
    player.startOver();
+   playerLifes[1].firstChild.classList.add('alive');
+   playerLifes[2].firstChild.classList.add('alive');
+   playerLifes[3].firstChild.classList.add('alive');
+   playerScore.innerText = '0 / 100';
  }
 
 //Game level - enemies speed factor
 const gameLevel = 5;
 //Points to win - number of points to win the game
 const winningScore = 100;
-//Game score
-let score = 0;
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -197,19 +198,29 @@ const modalText = document.getElementById('modal-text');
 const close = document.getElementsByClassName("close")[0];
 // Get the play again button element
 const play = document.querySelector('.button');
+// Get the reset button element
+const reset = document.querySelector('.restart');
+// Get hearts element
+const playerLifes = document.querySelector('.hearts').children;
+// Get score element
+const playerScore = document.getElementById('score');
 
 // When the user clicks on <close> (x), close the modal
 close.addEventListener("click", function() {
   modal.classList.toggle("opened");
+  resetGame();
 });
 
+//play again button
 play.addEventListener("click", function() {
   modal.classList.toggle("opened");
+  resetGame();
 });
 
 // When the user clicks anywhere outside of the modal, close it
 window.addEventListener("click", function(event) {
   if (event.target === modal) {
     modal.classList.toggle("opened");
+    resetGame();
   }
 });

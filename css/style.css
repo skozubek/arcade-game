@@ -1,5 +1,54 @@
 body {
     text-align: center;
+    font-family: 'Coda', cursive;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+
+/*
+ * Styles for the Score Panel
+ */
+
+.score-panel {
+  text-align: left;
+  width: 345px;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.score-panel .hearts {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  margin: 0 5px 0 0;
+}
+
+.score-panel .hearts li {
+  list-style: none;
+  display: inline-block;
+}
+
+.score-panel .hearts .greyedout {
+  color: grey;
+}
+
+.score-panel .hearts .alive {
+  color: red;
+}
+
+.score-panel .restart {
+  float: right;
+  cursor: pointer;
 }
 
 .modal {

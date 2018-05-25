@@ -86,17 +86,21 @@ var Engine = (function(global) {
     function checkCollisions(){
       if(player.x+35>=enemy1.x-35 && player.x-35<=enemy1.x+35 &&
         player.y+10>=enemy1.y-10 && player.y-10<=enemy1.y+10) {
+        player.handleLifes();
         player.startOver();
       }
       if(player.x+35>=enemy2.x-35 && player.x-35<=enemy2.x+35 &&
         player.y+10>=enemy2.y-10 && player.y-10<=enemy2.y+10) {
+        player.handleLifes();
         player.startOver();
       }
       if(player.x+35>=enemy3.x-35 && player.x-35<=enemy3.x+35 &&
         player.y+10>=enemy3.y-10 && player.y-10<=enemy3.y+10) {
+        player.handleLifes();
         player.startOver();
       }
     }
+
 
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
